@@ -4,6 +4,7 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/mvc
@@ -11,13 +12,18 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context.xsd
             http://www.springframework.org/schema/tx
-            http://www.springframework.org/schema/tx/spring-tx.xsd">
+            http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--component scanning-->
     <context:component-scan base-package="com.tomtre.shoppinglist.backend"/>
 
     <!--conversion, formatting, validation-->
     <mvc:annotation-driven/>
+
+    <!--AspectJ autoproxy support for AOP-->
+    <aop:aspectj-autoproxy/>
 
     <!--Spring MVC view resolver-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -63,7 +69,7 @@
     </bean>
 
     <!--Enable configuration of transactional behavior based on annotations-->
-    <tx:annotation-driven />
+    <tx:annotation-driven/>
 
     <!--<mvc:resources mapping="/resources/**" location="/resources/"/>-->
 
