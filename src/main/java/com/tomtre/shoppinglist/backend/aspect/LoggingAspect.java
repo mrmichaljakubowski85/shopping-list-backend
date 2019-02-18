@@ -1,9 +1,7 @@
 package com.tomtre.shoppinglist.backend.aspect;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
@@ -25,17 +23,24 @@ public class LoggingAspect {
     private void forDaoPackage() {
     }
 
-    @Pointcut("forDaoPackage() || forServicePackage() || forDaoPackage()")
-    private void forAppFlow() {}
+    @Pointcut("forControllerPackage () || forServicePackage() || forDaoPackage()")
+    private void forAppFlow() {
+    }
 
     @Before("forAppFlow()")
     public void beforeAdvice(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().toShortString();
-        LOGGER.info("calling method: " + methodName);
+        LOGGER.info("before calling method: " + methodName);
         Object[] methodArgs = joinPoint.getArgs();
         for (int i = 0; i < methodArgs.length; i++) {
             LOGGER.info("methodArgs[" + i + "]: " + methodArgs[i]);
         }
+    }
 
+    @AfterReturning(pointcut = "forAppFlow()", returning = "result")
+    public void afterReturningAdvice(JoinPoint joinPoint, Object result) {
+        String methodName = joinPoint.getSignature().toShortString();
+        LOGGER.info("after returning from method: " + methodName);
+        LOGGER.info("result: " + result);
     }
 }
