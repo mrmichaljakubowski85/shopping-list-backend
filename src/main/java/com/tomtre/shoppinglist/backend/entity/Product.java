@@ -1,33 +1,18 @@
 package com.tomtre.shoppinglist.backend.entity;
 
-import org.springframework.lang.Nullable;
-
-import javax.annotation.PreDestroy;
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "product")
-public class Product {
-
-
-//    by layer (controller, model, view, service) - sprawdza się w prostych apkach
-//    by feature (product, order, customer)
-
-    @GeneratedValue
-    @Id
-    private UUID id;
+public class Product extends BaseEntity {
 
     @Column(nullable = false)
     private String title;
 
-    @Column
     private String description;
 
-    @Column
     private String quantity;
 
-    @Column
     private String unit;
 
     @Column(nullable = false)
@@ -43,14 +28,6 @@ public class Product {
         this.quantity = quantity;
         this.unit = unit;
         this.checked = checked;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -96,12 +73,11 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", quantity='" + quantity + '\'' +
                 ", unit='" + unit + '\'' +
                 ", checked=" + checked +
-                '}';
+                "} " + super.toString();
     }
 }

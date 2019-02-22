@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
 
     private final ProductDAO productDAO;
@@ -20,25 +21,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
     public List<Product> getProducts() {
         return productDAO.getProducts();
     }
 
     @Override
-    @Transactional
-    public void saveOrUpdateProduct(Product product) {
-        productDAO.saveOrUpdateProduct(product);
+    public void saveProduct(Product product) {
+        productDAO.saveProduct(product);
     }
 
     @Override
-    @Transactional
+    public void updateProduct(Product product) {
+        productDAO.updateProduct(product);
+    }
+
+    @Override
     public Product getProduct(UUID productId) {
         return productDAO.getProduct(productId);
     }
 
     @Override
-    @Transactional
     public void deleteProduct(UUID productId) {
         productDAO.removeProduct(productId);
     }

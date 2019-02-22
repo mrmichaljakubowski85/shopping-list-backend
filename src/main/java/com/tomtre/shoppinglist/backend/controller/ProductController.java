@@ -37,14 +37,19 @@ public class ProductController {
 
     @PostMapping("/saveProduct")
     public String saveProduct(@ModelAttribute("product") Product product) {
-        productService.saveOrUpdateProduct(product);
+        if (product.getId() == null) {
+            product.setId(UUID.randomUUID());
+            productService.saveProduct(product);
+        } else {
+            productService.updateProduct(product);
+        }
         return "redirect:/product/list";
     }
 
     @GetMapping("/update")
     public String updateProduct(@RequestParam("productId") UUID productId, Model model) {
-        //todo add check
         Product product = productService.getProduct(productId);
+        model.addAttribute("productNotFound", product == null);
         model.addAttribute("product", product);
         return "product-form";
     }

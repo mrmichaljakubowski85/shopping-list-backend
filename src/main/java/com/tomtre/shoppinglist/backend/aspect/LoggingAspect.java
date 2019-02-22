@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 @Aspect
 @Component
 public class LoggingAspect {
-    private final static Logger LOGGER = Logger.getLogger(LoggingAspect.class.getName());
+    private final static Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
     @Pointcut("execution(* com.tomtre.shoppinglist.backend.controller.*.*(..))")
     private void forControllerPackage() {
@@ -30,17 +30,17 @@ public class LoggingAspect {
     @Before("forAppFlow()")
     public void beforeAdvice(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().toShortString();
-        LOGGER.info("before calling method: " + methodName);
+        logger.info("before calling method: " + methodName);
         Object[] methodArgs = joinPoint.getArgs();
         for (int i = 0; i < methodArgs.length; i++) {
-            LOGGER.info("methodArgs[" + i + "]: " + methodArgs[i]);
+            logger.info("methodArgs[" + i + "]: " + methodArgs[i]);
         }
     }
 
     @AfterReturning(pointcut = "forAppFlow()", returning = "result")
     public void afterReturningAdvice(JoinPoint joinPoint, Object result) {
         String methodName = joinPoint.getSignature().toShortString();
-        LOGGER.info("after returning from method: " + methodName);
-        LOGGER.info("result: " + result);
+        logger.info("after returning from method: " + methodName);
+        logger.info("result: " + result);
     }
 }

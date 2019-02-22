@@ -28,12 +28,6 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public void saveOrUpdateProduct(Product product) {
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(product);
-    }
-
-    @Override
     public Product getProduct(UUID productId) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Product.class, productId);
@@ -45,5 +39,17 @@ public class ProductDAOImpl implements ProductDAO {
         Query query = session.createQuery("delete from Product where id = :productId");
         query.setParameter("productId", productId);
         query.executeUpdate();
+    }
+
+    @Override
+    public void saveProduct(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(product);
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.merge(product);
     }
 }

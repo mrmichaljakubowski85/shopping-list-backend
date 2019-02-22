@@ -10,9 +10,11 @@ public interface ProductDAO {
 
     List<Product> getProducts();
 
-    void saveOrUpdateProduct(Product product);
-
     Product getProduct(UUID productId);
 
     void removeProduct(UUID productId);
+
+    void saveProduct(Product product);
+
+    void updateProduct(Product product);
 }

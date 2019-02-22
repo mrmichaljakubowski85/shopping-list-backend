@@ -9,7 +9,9 @@ public interface ProductService {
 
     List<Product> getProducts();
 
-    void saveOrUpdateProduct(Product product);
+    void saveProduct(Product product);
+
+    void updateProduct(Product product);
 
     Product getProduct(UUID productId);
 

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>List of Products</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
 </head>
 <body>
 <div id="wrapper">
